@@ -4,7 +4,7 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jdt.core.ICompilationUnit;
+import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.dialogs.IDialogPage;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -118,15 +118,19 @@ public class ExcelNewWizardPage1 extends WizardPage {
 					return;
 				}
 				
-			} else if(obj instanceof ICompilationUnit){
-				ICompilationUnit cu = (ICompilationUnit) obj;
-				IResource resource = cu.getResource();
+			} else if(obj instanceof IJavaElement){
+				IJavaElement element = (IJavaElement) obj;
+				IResource resource = element.getResource();
 				
-				IContainer container = resource.getParent();
-				containerText.setText(container.getFullPath().toString());
-				fileText.setText(getInitialFileName(resource.getName()) + ".xls");
-				return;
-				
+				if(resource instanceof IContainer){
+					containerText.setText(resource.getFullPath().toString());
+					
+				} else {
+					IContainer container = resource.getParent();
+					containerText.setText(container.getFullPath().toString());
+					fileText.setText(getInitialFileName(resource.getName()) + ".xls");
+					return;
+				}
 			} else {
 				// TODO Debug
 				System.out.println(obj.getClass());
