@@ -18,7 +18,6 @@ public class DatabaseInfo {
 	private String catalog = "";
 	private String schema = "";
 	private Driver driver = null;
-	private boolean enableView = false;
 	private String productName = null;
 	
 	final public String POSTGRESQL = "PostgreSQL";
@@ -70,14 +69,6 @@ public class DatabaseInfo {
 		return this.user;
 	}
 
-	public void setEnableView(boolean flag) {
-		enableView = flag;
-	}
-	
-	public boolean isEnableView(){
-		return this.enableView;
-	}
-	
 	/**
 	 * Connect to the database and return the connection.
 	 * 
@@ -112,7 +103,7 @@ public class DatabaseInfo {
 			
 			while (tables.next()) {
 				String t = tables.getString("TABLE_TYPE");
-				if ("TABLE".equals(t) || ("VIEW".equals(t) && enableView) || (isOracle() && "SYNONYM".equals(t))) {
+				if ("TABLE".equals(t) || (isOracle() && "SYNONYM".equals(t))) {
 					list.add(tables.getString("table_name"));
 				}
 			}

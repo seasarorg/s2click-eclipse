@@ -44,7 +44,6 @@ public class ExcelNewWizardPage2 extends WizardPage {
 
 	private JarClassLoader classLoader;
 	private DatabaseInfo dbinfo;
-	private Button view;
 	private Text jarFile;
 	private Combo driver;
 	private TableViewer tableViewer;
@@ -147,10 +146,6 @@ public class ExcelNewWizardPage2 extends WizardPage {
 
 		new Label(container, SWT.NULL);
 		//-------------
-		UIUtils.createLabel(container, "ビューを含む");
-		view = new Button(container, SWT.CHECK);
-		new Label(container, SWT.NULL);
-		//-------------
 		new Label(container, SWT.NULL);
 		Button load = new Button(container, SWT.PUSH);
 		load.setText("テーブル読み込み");
@@ -250,7 +245,6 @@ public class ExcelNewWizardPage2 extends WizardPage {
 			dbinfo.setPassword(password.getText());
 			dbinfo.setCatalog(catalog.getText());
 			dbinfo.setSchema(schema.getText());
-			dbinfo.setEnableView(view.getSelection());
 			
 			tableModel.clear();
 			//filter.setText("");
