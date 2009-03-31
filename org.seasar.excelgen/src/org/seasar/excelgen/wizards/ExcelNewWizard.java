@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -146,7 +147,6 @@ public class ExcelNewWizard extends Wizard implements INewWizard {
 		try {
 			conn = dbInfo.connect();
 			DatabaseMetaData meta = conn.getMetaData();
-			List<String> columnNames = new ArrayList<String>();
 			
 			for(int i = 0; i < tableNames.size(); i++){
 				String tableName = tableNames.get(i);
@@ -157,10 +157,7 @@ public class ExcelNewWizard extends Wizard implements INewWizard {
 				// ヘッダの作成
 				HSSFRow headerRow = sheet1.createRow(0);
 			
-				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT * FROM \"" + tableName + "\"");
-//				ResultSetMetaData rm = rs.getMetaData();
-				
+				List<String> columnNames = new ArrayList<String>();
 				ResultSet columns = meta.getColumns(
 						dbInfo.getCatalog(), dbInfo.getSchema(), tableName, "%");
 				while(columns.next()){
@@ -169,14 +166,34 @@ public class ExcelNewWizard extends Wizard implements INewWizard {
 					columnNames.add(columns.getString("COLUMN_NAME"));
 				}
 				
+				StringBuilder sb = new StringBuilder();
+				sb.append("SELECT ");
+				
+				for(int j = 0; j < columnNames.size(); j++){
+					if(j != 0){
+						sb.append(",");
+					}
+					sb.append(columnNames.get(j));
+				}
+				
+				sb.append(" FROM ");
+				sb.append("\"").append(tableName).append("\"");
+				
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(sb.toString());
+				
 				// データの作成
 				while(rs.next()){
 					int rowCount = 1;
 					HSSFRow row = sheet1.createRow(rowCount);
 					
 					for(int j = 0; j < columnNames.size(); j++){
-						row.createCell((short) j).setCellValue(
-								new HSSFRichTextString(rs.getString(columnNames.get(j))));
+						HSSFCell cell = row.createCell((short) j);
+						String value = rs.getString(columnNames.get(j));
+						if(value != null){
+							cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+							cell.setCellValue(new HSSFRichTextString(value));
+						}
 					}
 					
 					rowCount++;

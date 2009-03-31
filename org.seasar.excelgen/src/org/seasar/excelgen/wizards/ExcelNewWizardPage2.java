@@ -231,11 +231,12 @@ public class ExcelNewWizardPage2 extends WizardPage {
 		
 		@Override
 		public boolean select(Viewer viewer, Object parentElement, Object element) {
-			String tableName = (String) element;
-			if(tableName.indexOf(filter.getText()) >= 0){
-				return true;
-			}
-			return false;
+//			String tableName = (String) element;
+//			if(tableName.indexOf(filter.getText()) >= 0){
+//				return true;
+//			}
+//			return false;
+			return true;
 		}
 		
 	}
@@ -252,7 +253,7 @@ public class ExcelNewWizardPage2 extends WizardPage {
 			dbinfo.setEnableView(view.getSelection());
 			
 			tableModel.clear();
-			filter.setText("");
+			//filter.setText("");
 			
 			for(String tableName: dbinfo.loadTables()){
 				tableModel.add(tableName);
