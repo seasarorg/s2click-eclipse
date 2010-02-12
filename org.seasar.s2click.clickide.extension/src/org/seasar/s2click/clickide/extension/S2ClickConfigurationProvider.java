@@ -1,9 +1,8 @@
 package org.seasar.s2click.clickide.extension;
 
-import net.sf.clickide.ClickPlugin;
-import net.sf.clickide.ClickUtils;
-import net.sf.clickide.core.config.DefaultClickConfigurationProvider;
-
+import org.apache.click.eclipse.ClickPlugin;
+import org.apache.click.eclipse.ClickUtils;
+import org.apache.click.eclipse.core.config.DefaultClickConfigurationProvider;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -21,9 +20,9 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
 /**
- * S2Click�p��<code>IClickConfigurationProvider</code>�����N���X�ł��B
+ * S2Click用の<code>IClickConfigurationProvider</code>実装クラスです。
  * <p>
- * <tt>s2click.dicon</tt>����ݒ����ǂݍ��݂܂��B
+ * <tt>s2click.dicon</tt>から設定情報を読み込みます。
  * 
  * @author Naoki Takezoe
  */
@@ -33,7 +32,7 @@ public class S2ClickConfigurationProvider extends DefaultClickConfigurationProvi
 	private static final String CONVENTION_DICON = "convention.dicon";
 	
 	/**
-	 * S2Click�ł͏�Ɏ����}�b�s���O���L���Ȃ��߁A���̃��\�b�h�͏��<code>true</code>��Ԃ��܂��B
+	 * S2Clickでは常に自動マッピングが有効なため、このメソッドは常に<code>true</code>を返します。
 	 * 
 	 * @return true
 	 */

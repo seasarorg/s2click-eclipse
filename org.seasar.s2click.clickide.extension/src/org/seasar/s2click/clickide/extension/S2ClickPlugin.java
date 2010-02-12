@@ -5,8 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 
-import net.sf.clickide.ClickUtils;
-
+import org.apache.click.eclipse.ClickUtils;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -61,14 +60,14 @@ public class S2ClickPlugin extends AbstractUIPlugin {
 		return plugin;
 	}
 	
-	/** ƒuƒ‰ƒ“ƒNƒvƒƒWƒFƒNƒg‚Ìƒeƒ“ƒ|ƒ‰ƒŠƒtƒ@ƒCƒ‹ */
+	/** ãƒ–ãƒ©ãƒ³ã‚¯ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ†ãƒ³ãƒãƒ©ãƒªãƒ•ã‚¡ã‚¤ãƒ« */
 	private File blankZip = null;
 	
-	/** S2JDBC‚ğg‚¤ƒuƒ‰ƒ“ƒNƒvƒƒWƒFƒNƒg‚Ìƒeƒ“ƒ|ƒ‰ƒŠƒtƒ@ƒCƒ‹ */
+	/** S2JDBCã‚’ä½¿ã†ãƒ–ãƒ©ãƒ³ã‚¯ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ†ãƒ³ãƒãƒ©ãƒªãƒ•ã‚¡ã‚¤ãƒ« */
 	private File blankS2JdbcZip = null;
 	
 	/**
-	 * ƒvƒƒWƒFƒNƒg‚Ì¶¬‚É•K—v‚ÈƒŠƒ\[ƒX‚ğƒeƒ“ƒ|ƒ‰ƒŠƒtƒHƒ‹ƒ_‚ÉƒRƒs[‚µ‚Ü‚·B
+	 * ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®ç”Ÿæˆã«å¿…è¦ãªãƒªã‚½ãƒ¼ã‚¹ã‚’ãƒ†ãƒ³ãƒãƒ©ãƒªãƒ•ã‚©ãƒ«ãƒ€ã«ã‚³ãƒ”ãƒ¼ã—ã¾ã™ã€‚
 	 */
 	private void copyResources() throws IOException {
 		if(blankZip == null){
@@ -86,7 +85,7 @@ public class S2ClickPlugin extends AbstractUIPlugin {
 	}
 	
 	/**
-	 * ƒeƒ“ƒ|ƒ‰ƒŠƒtƒHƒ‹ƒ_‚ÉƒRƒs[‚µ‚½ƒŠƒ\[ƒX‚ğíœ‚µ‚Ü‚·B
+	 * ãƒ†ãƒ³ãƒãƒ©ãƒªãƒ•ã‚©ãƒ«ãƒ€ã«ã‚³ãƒ”ãƒ¼ã—ãŸãƒªã‚½ãƒ¼ã‚¹ã‚’å‰Šé™¤ã—ã¾ã™ã€‚
 	 */
 	private void removeResources(){
 		if(blankZip != null){
@@ -96,10 +95,10 @@ public class S2ClickPlugin extends AbstractUIPlugin {
 	}
 	
 	/**
-	 * S2ClickƒvƒƒWƒFƒNƒg‚ğì¬‚µ‚Ü‚·B
+	 * S2Clickãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã—ã¾ã™ã€‚
 	 * 
-	 * @param projectName ƒvƒƒWƒFƒNƒg–¼
-	 * @param useS2Jdbc S2JDBC‚ğg‚¤‚©‚Ç‚¤‚©
+	 * @param projectName ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå
+	 * @param useS2Jdbc S2JDBCã‚’ä½¿ã†ã‹ã©ã†ã‹
 	 */
 	public void createProject(String projectName, boolean useS2Jdbc,
 			IProgressMonitor monitor) throws IOException, CoreException {
@@ -107,7 +106,7 @@ public class S2ClickPlugin extends AbstractUIPlugin {
 			monitor = new NullProgressMonitor();
 		}
 		
-		monitor.beginTask("S2ClickƒvƒƒWƒFƒNƒg‚ğì¬’†...", 3);
+		monitor.beginTask("S2Clickãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆä¸­...", 3);
 		
 		copyResources();
 		monitor.worked(1);
@@ -116,7 +115,7 @@ public class S2ClickPlugin extends AbstractUIPlugin {
 		IProject project = root.getProject(projectName);
 		project.create(monitor);
 		
-		// TODO ƒŠƒ\[ƒX‚ğƒvƒƒWƒFƒNƒg‚ÉƒRƒs[
+		// TODO ãƒªã‚½ãƒ¼ã‚¹ã‚’ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã«ã‚³ãƒ”ãƒ¼
 		
 		project.open(monitor);
 		

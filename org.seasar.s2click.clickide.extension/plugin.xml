@@ -2,7 +2,7 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
-         point="net.sf.clickide.configurationProvider">
+         point="org.apache.click.eclipse.configurationProvider">
       <configurationProvider
             class="org.seasar.s2click.clickide.extension.S2ClickConfigurationProvider">
       </configurationProvider>
