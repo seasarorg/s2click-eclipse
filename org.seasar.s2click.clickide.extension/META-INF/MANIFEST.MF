@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ClickIDE Extension for S2Click
 Bundle-SymbolicName: org.seasar.s2click.clickide.extension;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1
 Bundle-Activator: org.seasar.s2click.clickide.extension.S2ClickPlugin
 Bundle-Vendor: The Seasar Project
 Require-Bundle: org.eclipse.ui,
